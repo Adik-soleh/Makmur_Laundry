@@ -43,7 +43,7 @@ const PricingPage = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="mt-auto w-full" href="https://wa.me/628999761125">
+              <Button className="mt-auto w-full" href="https://wa.me/628999761125" target="_blank">
                 Konsultasi Paket
               </Button>
             </article>
