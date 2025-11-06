@@ -50,10 +50,7 @@ const Navbar = () => {
           ))}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
-          <Button variant="ghost" href="tel:081234567890">
-            628999761125
-          </Button>
-          <Button href="https://wa.me/628999761125">Pesan Sekarang</Button>
+          <Button href="https://wa.me/628999761125" target="_blank">Pesan Sekarang</Button>
         </div>
         <button
           type="button"
@@ -92,10 +89,7 @@ const Navbar = () => {
               </button>
             ))}
             <div className="flex flex-col gap-3 pt-4">
-              <Button variant="ghost" href="tel:081234567890">
-                628999761125
-              </Button>
-              <Button href="https://wa.me/628999761125">Pesan Sekarang</Button>
+              <Button href="https://wa.me/628999761125" target="_blank">Pesan Sekarang</Button>
             </div>
           </nav>
         </div>
