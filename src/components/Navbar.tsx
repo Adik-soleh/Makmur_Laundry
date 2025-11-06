@@ -56,44 +56,58 @@ const Navbar = () => {
           type="button"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-brand-400/60 hover:text-brand-300 focus-visible:border-brand-400 focus-visible:text-brand-300 lg:hidden"
+          aria-controls="mobile-menu"
         >
           <span className="sr-only">Buka menu</span>
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          >
-            {isMenuOpen ? (
-              <path d="M5 5 15 15M15 5 5 15" strokeLinecap="round" strokeLinejoin="round" />
-            ) : (
-              <path d="M3 6h14M3 10h14M3 14h14" strokeLinecap="round" strokeLinejoin="round" />
-            )}
-          </svg>
+          <span className="relative flex h-5 w-5 items-center justify-center" aria-hidden="true">
+            <span
+              className={`absolute h-0.5 w-5 rounded-full bg-current transition-transform duration-300 ease-in-out ${
+                isMenuOpen ? "translate-y-0 rotate-45" : "-translate-y-[6px] rotate-0"
+              }`}
+            />
+            <span
+              className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-200 ease-in-out ${
+                isMenuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute h-0.5 w-5 rounded-full bg-current transition-transform duration-300 ease-in-out ${
+                isMenuOpen ? "translate-y-0 -rotate-45" : "translate-y-[6px] rotate-0"
+              }`}
+            />
+          </span>
         </button>
       </div>
-      {isMenuOpen && (
-        <div className="border-t border-white/10 bg-slate-950/95 backdrop-blur lg:hidden">
-          <nav className="container flex flex-col gap-4 py-6 text-sm font-medium text-slate-200">
-            {navigationLinks.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => handleNavClick(item.href)}
-                className="bg-transparent text-left text-slate-200 transition-colors hover:text-brand-300 focus:outline-none"
-              >
-                {item.label}
-              </button>
-            ))}
-            <div className="flex flex-col gap-3 pt-4">
-              <Button href="https://wa.me/628999761125" target="_blank">Pesan Sekarang</Button>
-            </div>
-          </nav>
-        </div>
-      )}
+      <div
+        aria-hidden={!isMenuOpen}
+        className={`overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur transition-all duration-300 ease-out lg:hidden ${
+          isMenuOpen
+            ? "pointer-events-auto opacity-100 translate-y-0 max-h-[520px]"
+            : "pointer-events-none opacity-0 -translate-y-2 max-h-0"
+        }`}
+      >
+        <nav
+          id="mobile-menu"
+          className={`container flex flex-col gap-4 text-sm font-medium text-slate-200 transition-[padding] duration-300 ease-out ${
+            isMenuOpen ? "py-6" : "py-0"
+          }`}
+        >
+          {navigationLinks.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => handleNavClick(item.href)}
+              className="bg-transparent text-left text-slate-200 transition-colors hover:text-brand-300 focus:outline-none"
+            >
+              {item.label}
+            </button>
+          ))}
+          <div className={`flex flex-col gap-3 transition-[margin] duration-300 ease-out ${isMenuOpen ? "pt-4" : "pt-0"}`}>
+            <Button href="https://wa.me/628999761125" target="_blank">Pesan Sekarang</Button>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
