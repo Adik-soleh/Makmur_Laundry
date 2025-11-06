@@ -34,7 +34,7 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4">
-            <Button href="https://wa.me/628999761125">Coba Gratis 1x</Button>
+            <Button href="https://wa.me/628999761125" target="_blank">Coba Gratis 1x</Button>
             <Button variant="secondary" onClick={scrollToPricing}>
               Lihat Paket
             </Button>
