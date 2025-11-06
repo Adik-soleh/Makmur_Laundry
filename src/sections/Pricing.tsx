@@ -45,7 +45,7 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="mt-10 w-full" href="https://wa.me/628999761125">
+              <Button className="mt-10 w-full" href="https://wa.me/628999761125" target="_blank">
                 Konsultasi Gratis
               </Button>
             </article>
