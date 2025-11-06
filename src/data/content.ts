@@ -213,13 +213,13 @@ export const pricingPlans = [
 
 export const testimonials = [
   {
-    name: "Ayu Pramesti",
-    role: "Owner Kos Putri Harmoni",
+    name: "Dewi Sri Mulyani",
+    role: "CEO",
     quote:
       "Layanan MakmurLaundry sangat membantu operasional harian. Cucian selalu tepat waktu dan tim support sigap ketika ada permintaan tambahan."
   },
   {
-    name: "Dimas Wirawan",
+    name: "Muhammad Arifin",
     role: "Product Manager",
     quote:
       "Seluruh pakaian kerja saya ditangani di sini. Wangi tahan lama dan tidak pernah ada pakaian hilang. Tracking statusnya juga transparan sekali."
