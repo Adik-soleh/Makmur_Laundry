@@ -19,7 +19,7 @@ const CTA = () => {
           tim kami siap berdiskusi kapan pun Anda butuhkan.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button href="https://wa.me/628999761125">Buat Jadwal Sekarang</Button>
+          <Button href="https://wa.me/628999761125" target="_blank">Buat Jadwal Sekarang</Button>
           <Button variant="secondary" href="tel:081234567890">
             Konsultasi via Telepon
           </Button>
