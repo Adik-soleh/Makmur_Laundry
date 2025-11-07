@@ -15,10 +15,10 @@ type ButtonProps = {
 
 const variantClasses: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "bg-brand-500 text-white shadow-lg shadow-brand-500/30 hover:bg-brand-400 transition-colors",
+    "bg-brand-500 text-white shadow-lg shadow-brand-500/30 hover:bg-brand-400",
   secondary:
-    "bg-white/10 text-white border border-white/15 hover:bg-white/15 backdrop-blur transition-colors",
-  ghost: "text-white hover:text-brand-300 transition-colors"
+    "border border-slate-200 bg-slate-100 text-slate-900 hover:bg-slate-200/70 dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 backdrop-blur",
+  ghost: "text-slate-900 hover:text-brand-500 dark:text-white dark:hover:text-brand-300"
 };
 
 const Button = ({
@@ -33,7 +33,7 @@ const Button = ({
   onClick
 }: ButtonProps) => {
   const baseClasses =
-    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold";
+    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950";
 
   if (to) {
     return (
