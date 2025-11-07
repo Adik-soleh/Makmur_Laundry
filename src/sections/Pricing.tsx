@@ -7,7 +7,7 @@ const Pricing = () => {
   const sectionRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section id="pricing" ref={sectionRef} className="scroll-reveal bg-slate-950 py-24">
+    <section id="pricing" ref={sectionRef} className="scroll-reveal bg-slate-50 py-24 dark:bg-slate-950">
       <div className="container space-y-16">
         <SectionHeading
           eyebrow="Paket Hemat"
@@ -18,19 +18,19 @@ const Pricing = () => {
           {pricingPlans.map((plan) => (
             <article
               key={plan.name}
-              className="group flex flex-col rounded-3xl border border-white/10 bg-white/5 p-8 transition hover:border-brand-400/40"
+              className="group flex flex-col rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-brand-400/40 dark:border-white/10 dark:bg-white/5"
             >
               <div className="flex flex-col gap-3">
-                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-300">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-600 dark:text-brand-300">
                   {plan.name}
                 </span>
-                <p className="text-3xl font-semibold text-white">{plan.price}</p>
-                <p className="text-sm leading-relaxed text-slate-400">{plan.tagline}</p>
+                <p className="text-3xl font-semibold text-slate-900 dark:text-white">{plan.price}</p>
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{plan.tagline}</p>
               </div>
-              <ul className="mt-8 flex flex-1 flex-col gap-3 text-sm text-slate-300">
+              <ul className="mt-8 flex flex-1 flex-col gap-3 text-sm text-slate-600 dark:text-slate-300">
                 {plan.highlights.map((highlight) => (
                   <li key={highlight} className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-500/10 text-brand-200">
+                    <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-200">
                       <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none">
                         <path
                           d="M3.5 8.5 6.5 11.5 12.5 4.5"
