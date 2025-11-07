@@ -4,10 +4,11 @@ import { services } from "../data/content";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const renderIcon = (type: (typeof services)[number]["icon"]) => {
+  const iconClass = "h-6 w-6 text-brand-500 dark:text-brand-200";
   switch (type) {
     case "laundry":
       return (
-        <svg className="h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="none">
+        <svg className={iconClass} viewBox="0 0 24 24" fill="none">
           <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
           <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
           <path
@@ -20,7 +21,7 @@ const renderIcon = (type: (typeof services)[number]["icon"]) => {
       );
     case "dry":
       return (
-        <svg className="h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="none">
+        <svg className={iconClass} viewBox="0 0 24 24" fill="none">
           <path
             d="M7 4h10l2 16H5L7 4Z"
             stroke="currentColor"
@@ -37,7 +38,7 @@ const renderIcon = (type: (typeof services)[number]["icon"]) => {
       );
     case "linen":
       return (
-        <svg className="h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="none">
+        <svg className={iconClass} viewBox="0 0 24 24" fill="none">
           <rect
             x="4"
             y="6"
@@ -57,7 +58,7 @@ const renderIcon = (type: (typeof services)[number]["icon"]) => {
       );
     case "shoe":
       return (
-        <svg className="h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="none">
+        <svg className={iconClass} viewBox="0 0 24 24" fill="none">
           <path
             d="M4 13c4 0 6-4 8-4 3 0 3 4 9 4v3a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1v-4Z"
             stroke="currentColor"
@@ -81,7 +82,7 @@ const Services = () => {
   const sectionRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section id="services" ref={sectionRef} className="scroll-reveal bg-slate-950 py-24">
+    <section id="services" ref={sectionRef} className="scroll-reveal bg-slate-50 py-24 dark:bg-slate-950">
       <div className="container space-y-16">
         <SectionHeading
           eyebrow="Layanan Utama"
@@ -92,18 +93,20 @@ const Services = () => {
           {services.map((service) => (
             <article
               key={service.title}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 transition-transform duration-300 hover:-translate-y-1 hover:border-brand-400/40"
+              className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:border-brand-400/50 dark:border-white/10 dark:bg-white/5"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 to-brand-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 to-brand-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative space-y-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-500/10">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-200">
                   {renderIcon(service.icon)}
                 </span>
-                <h3 className="text-xl font-semibold text-white">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-400">{service.description}</p>
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  {service.description}
+                </p>
                 <Link
                   to={`/layanan/${service.slug}`}
-                  className="text-sm font-semibold text-brand-300 transition-colors hover:text-brand-200"
+                  className="text-sm font-semibold text-brand-600 transition-colors hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200"
                 >
                   Detail Layanan -&gt;
                 </Link>
