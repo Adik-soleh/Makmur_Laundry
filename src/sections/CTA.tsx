@@ -7,14 +7,14 @@ const CTA = () => {
   return (
     <section
       ref={sectionRef}
-      className="scroll-reveal relative overflow-hidden bg-gradient-to-br from-brand-500/20 via-brand-500/10 to-transparent py-20"
+      className="scroll-reveal relative overflow-hidden bg-gradient-to-br from-brand-500/10 via-brand-500/5 to-slate-50 py-20 dark:from-brand-500/20 dark:via-brand-500/10 dark:to-transparent"
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,_rgba(0,141,255,0.15),_transparent_65%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,_rgba(0,141,255,0.2),_transparent_65%)] opacity-50 dark:opacity-80" />
       <div className="container flex flex-col items-center gap-8 text-center">
-        <h2 className="max-w-3xl text-3xl font-semibold text-white sm:text-4xl">
+        <h2 className="max-w-3xl text-3xl font-semibold text-slate-900 dark:text-white sm:text-4xl">
           Siap membuat rutinitas laundry Anda lebih mudah?
         </h2>
-        <p className="max-w-2xl text-base text-slate-300">
+        <p className="max-w-2xl text-base text-slate-600 dark:text-slate-300">
           Jadwalkan penjemputan pertama dan dapatkan voucher diskon 20%. Untuk kebutuhan bisnis,
           tim kami siap berdiskusi kapan pun Anda butuhkan.
         </p>
