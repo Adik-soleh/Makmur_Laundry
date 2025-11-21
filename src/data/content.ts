@@ -237,7 +237,10 @@ export const contactInfo = {
   phone: "628999761125",
   email: "halo@MakmurLaundry.id",
   socials: [
-    { label: "Instagram", href: "https://instagram.com/MakmurLaundry" },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/makmur_laundry_bsd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+    },
     { label: "LinkedIn", href: "https://linkedin.com/company/MakmurLaundry" },
     { label: "WhatsApp", href: "https://wa.me/628999761125" }
   ]
