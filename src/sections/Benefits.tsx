@@ -2,76 +2,81 @@ import SectionHeading from "../components/SectionHeading";
 import { benefits } from "../data/content";
 import useScrollReveal from "../hooks/useScrollReveal";
 
+const metrics = [
+  { label: "Kebersihan mesin", value: "100%", progress: 100 },
+  { label: "Kepatuhan SOP", value: "99.4%", progress: 99 },
+  { label: "Ketepatan waktu", value: "98.2%", progress: 98 }
+];
+
 const Benefits = () => {
   const sectionRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section
-      id="benefits"
-      ref={sectionRef}
-      className="scroll-reveal relative overflow-hidden bg-slate-50 py-24 dark:bg-slate-950"
-    >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,141,255,0.25),_transparent_60%)] opacity-40 dark:opacity-70" />
-      <div className="container space-y-16">
-        <SectionHeading
-          eyebrow="Kenapa MakmurLaundry"
-          title="Standar layanan hotel bintang lima untuk semua pelanggan"
-          description="Kualitas adalah prioritas kami. Kami mengombinasikan teknologi dan tim profesional untuk memastikan setiap helai pakaian ditangani dengan aman."
-        />
-        <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
-          <div className="grid gap-6">
-            {benefits.map((benefit) => (
-              <article
-                key={benefit.title}
-                className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400/40 dark:border-white/10 dark:bg-white/5"
-              >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  {benefit.description}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-6 rounded-[40px] bg-brand-500/20 blur-3xl dark:bg-brand-500/10" />
-            <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-section dark:border-white/10 dark:from-slate-900 dark:to-slate-950">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
-                    <p>Monitoring harian</p>
-                    <p className="text-xs">Quality Control Dashboard</p>
+    <section id="benefits" ref={sectionRef} className="scroll-reveal bg-sage-900 py-28 text-cream">
+      <div className="container">
+        <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
+          <div className="lg:col-span-7">
+            <span className="eyebrow !text-cream/60">
+              <span className="h-px w-10 bg-cream/40" />
+              Kenapa Makmur
+            </span>
+            <h2 className="mt-8 font-display text-4xl font-normal leading-[1.1] tracking-tight text-cream sm:text-5xl md:text-[56px]">
+              Standar yang diterima <em className="italic text-sage-200">hotel bintang lima,</em>
+              diberikan untuk rumah Anda.
+            </h2>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-cream/75">
+              Kami tidak berkompromi soal kualitas. Deterjen food-grade, mesin yang dirawat
+              berkala, dan tim yang bekerja dengan pengawasan langsung.
+            </p>
+
+            <div className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
+              {benefits.map((benefit, idx) => (
+                <article key={benefit.title} className="grid gap-6 py-8 md:grid-cols-[auto,1fr]">
+                  <span className="font-display text-sm text-sage-200">0{idx + 1}</span>
+                  <div>
+                    <h3 className="font-display text-2xl font-normal text-cream">{benefit.title}</h3>
+                    <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-cream/70">
+                      {benefit.description}
+                    </p>
                   </div>
-                  <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-semibold text-brand-600 dark:text-brand-200">
-                    Live
-                  </span>
-                </div>
-                <div className="space-y-4 rounded-3xl bg-slate-100 p-6 ring-1 ring-slate-200 dark:bg-black/40 dark:ring-white/10">
-                  {[
-                    { label: "Kebersihan mesin", value: "100%", progress: "100%" },
-                    { label: "Kepatuhan SOP", value: "99.4%", progress: "99%" },
-                    { label: "Ketepatan waktu", value: "98.2%", progress: "98%" }
-                  ].map((metric) => (
-                    <div key={metric.label} className="space-y-2">
-                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-                        <span>{metric.label}</span>
-                        <span className="font-semibold text-brand-600 dark:text-brand-200">{metric.value}</span>
-                      </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-white dark:bg-white/5">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-200"
-                          style={{ width: metric.progress }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Setiap pesanan diperiksa dua kali sebelum dikemas. Sistem otomatis mengirim notifikasi
-                  jika ditemukan potensi keterlambatan.
-                </p>
-              </div>
+                </article>
+              ))}
             </div>
           </div>
+
+          <aside className="lg:col-span-5 lg:pl-8">
+            <div className="border border-cream/15 bg-sage-800/40 p-8">
+              <div className="flex items-center justify-between border-b border-cream/15 pb-5">
+                <div>
+                  <p className="text-[11px] uppercase tracking-eyebrow text-cream/60">Quality Ledger</p>
+                  <p className="mt-1 font-display text-lg text-cream">Catatan bulan ini</p>
+                </div>
+                <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-eyebrow text-sage-200">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sage-200" /> Live
+                </span>
+              </div>
+              <div className="space-y-7 pt-7">
+                {metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-sm text-cream/80">{metric.label}</span>
+                      <span className="font-display text-xl text-cream">{metric.value}</span>
+                    </div>
+                    <div className="mt-3 h-px w-full bg-cream/15">
+                      <div
+                        className="h-px bg-sage-200"
+                        style={{ width: `${metric.progress}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 border-t border-cream/15 pt-6 text-sm leading-relaxed text-cream/70">
+                Setiap pesanan diperiksa dua kali sebelum dikemas. Jika kami menemukan potensi
+                keterlambatan, tim kami menghubungi Anda lebih dulu.
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

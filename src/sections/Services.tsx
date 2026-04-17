@@ -4,56 +4,28 @@ import { services } from "../data/content";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const renderIcon = (type: (typeof services)[number]["icon"]) => {
-  const iconClass = "h-6 w-6 text-brand-500 dark:text-brand-200";
+  const iconClass = "h-5 w-5 text-ink";
   switch (type) {
     case "laundry":
       return (
         <svg className={iconClass} viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-          <path
-            d="M8 7h8M7 4l2-2m6 2 2-2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
+          <rect x="3" y="4" width="18" height="16" rx="1" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M8 7h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       );
     case "dry":
       return (
         <svg className={iconClass} viewBox="0 0 24 24" fill="none">
-          <path
-            d="M7 4h10l2 16H5L7 4Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M10 9c1.5-1.5 2.5.5 4 0m-4 6c1.5-1.5 2.5.5 4 0"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
+          <path d="M7 4h10l2 16H5L7 4Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+          <path d="M10 10c1.5-1 2.5 1 4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       );
     case "linen":
       return (
         <svg className={iconClass} viewBox="0 0 24 24" fill="none">
-          <rect
-            x="4"
-            y="6"
-            width="16"
-            height="12"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M8 10h8m-8 4h8M6 6V4m12 2V4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
+          <rect x="4" y="6" width="16" height="12" rx="1" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M8 10h8m-8 4h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       );
     case "shoe":
@@ -62,14 +34,8 @@ const renderIcon = (type: (typeof services)[number]["icon"]) => {
           <path
             d="M4 13c4 0 6-4 8-4 3 0 3 4 9 4v3a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1v-4Z"
             stroke="currentColor"
-            strokeWidth="1.5"
+            strokeWidth="1.2"
             strokeLinejoin="round"
-          />
-          <path
-            d="M12 9h.01M9 9h.01M6 13h.01M20 13h.01"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
           />
         </svg>
       );
@@ -82,33 +48,55 @@ const Services = () => {
   const sectionRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section id="services" ref={sectionRef} className="scroll-reveal bg-slate-50 py-24 dark:bg-slate-950">
-      <div className="container space-y-16">
-        <SectionHeading
-          eyebrow="Layanan Utama"
-          title="Setiap cucian ditangani oleh spesialis"
-          description="Kami menyediakan layanan komprehensif untuk kebutuhan personal hingga bisnis. Semua proses diawasi oleh quality assurance agar hasil selalu konsisten."
-        />
-        <div className="grid gap-8 md:grid-cols-2">
-          {services.map((service) => (
+    <section id="services" ref={sectionRef} className="scroll-reveal bg-cream-light py-28">
+      <div className="container space-y-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <SectionHeading
+              eyebrow="Layanan"
+              title="Empat perawatan, satu standar."
+              description="Setiap layanan dikerjakan oleh tim yang memahami material — dari kaos harian hingga batik eksklusif. Kami tidak menggabungkan cucian antar pelanggan."
+            />
+          </div>
+          <div className="lg:col-span-5 lg:pb-4">
+            <p className="text-sm leading-relaxed text-ink-muted">
+              Harga dihitung per kilogram atau per item sesuai jenis perawatan. Konsultasi gratis
+              via WhatsApp sebelum Anda memesan.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid divide-y divide-ink/10 border-t border-b border-ink/10 lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+          {services.map((service, idx) => (
             <article
               key={service.title}
-              className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:border-brand-400/50 dark:border-white/10 dark:bg-white/5"
+              className={`group relative flex flex-col gap-6 p-10 transition-colors hover:bg-paper ${
+                idx >= 2 ? "lg:border-t lg:border-ink/10" : ""
+              }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 to-brand-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative space-y-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-200">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex h-11 w-11 items-center justify-center border border-ink/15 bg-paper">
                   {renderIcon(service.icon)}
                 </span>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  {service.description}
-                </p>
+                <span className="text-[10px] uppercase tracking-eyebrow text-ink-muted">
+                  0{idx + 1}
+                </span>
+              </div>
+              <div className="space-y-3">
+                <h3 className="font-display text-2xl font-normal leading-tight text-ink">
+                  {service.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-ink-soft">{service.description}</p>
+              </div>
+              <div className="mt-auto flex items-center justify-between pt-4">
+                <span className="text-[11px] uppercase tracking-eyebrow text-ink-muted">
+                  Selesai {service.turnaround}
+                </span>
                 <Link
                   to={`/layanan/${service.slug}`}
-                  className="text-sm font-semibold text-brand-600 transition-colors hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200"
+                  className="inline-flex items-center gap-2 border-b border-ink pb-0.5 text-[13px] font-medium text-ink transition-colors group-hover:text-sage-600 group-hover:border-sage-600"
                 >
-                  Detail Layanan -&gt;
+                  Detail <span aria-hidden>→</span>
                 </Link>
               </div>
             </article>

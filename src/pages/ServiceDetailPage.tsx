@@ -15,11 +15,11 @@ const ServiceDetailPage = () => {
 
   if (!service) {
     return (
-      <section className="bg-slate-50 py-24 dark:bg-slate-950">
-        <div className="container space-y-8 text-center text-slate-600 dark:text-slate-200">
-          <h1 className="text-3xl font-semibold text-slate-900 dark:text-white">Layanan tidak ditemukan</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Mohon pilih layanan yang tersedia melalui halaman utama kami.
+      <section className="bg-cream py-28">
+        <div className="container space-y-8 text-center text-ink-soft">
+          <h1 className="font-display text-4xl font-normal text-ink">Layanan tidak ditemukan</h1>
+          <p className="text-sm text-ink-muted">
+            Silakan pilih layanan yang tersedia melalui halaman utama kami.
           </p>
           <div className="flex justify-center gap-4">
             <Button to="/">Kembali ke Beranda</Button>
@@ -33,42 +33,62 @@ const ServiceDetailPage = () => {
   }
 
   return (
-    <section className="bg-slate-50 py-24 dark:bg-slate-950">
-      <div className="container space-y-12">
+    <section className="bg-cream py-20 sm:py-28">
+      <div className="container space-y-14">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-500 dark:text-brand-200 dark:hover:text-brand-100"
+          className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-soft transition-colors hover:text-ink"
         >
-          <span aria-hidden="true">←</span> Kembali
+          <span aria-hidden="true">←</span> Kembali ke beranda
         </Link>
-        <SectionHeading
-          align="left"
-          eyebrow="Detail Layanan"
-          title={service.title}
-          description={service.longDescription}
-        />
-        <div className="grid gap-10 lg:grid-cols-[1.7fr,1fr]">
-          <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-10 text-sm text-slate-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-            {service.process.map((item) => (
-              <div key={item.title} className="space-y-2">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
-                <p className="leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </article>
-          <aside className="space-y-6 rounded-3xl border border-brand-200 bg-brand-50 p-8 text-sm text-brand-900 dark:border-brand-400/30 dark:bg-brand-500/10 dark:text-brand-50">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600 dark:text-brand-200">Estimasi</p>
-              <p className="mt-2 text-3xl font-semibold text-brand-900 dark:text-white">{service.turnaround}</p>
+
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <SectionHeading
+              align="left"
+              eyebrow={`Layanan · ${service.slug.replace(/-/g, " ")}`}
+              title={service.title}
+              description={service.longDescription}
+            />
+          </div>
+          <p className="text-sm text-ink-muted lg:col-span-4 lg:pb-4">
+            Setiap tahapan dikerjakan oleh tim yang sama, diawasi langsung oleh pemilik outlet.
+          </p>
+        </div>
+
+        <div className="grid gap-10 lg:grid-cols-[1.6fr,1fr] lg:gap-14">
+          <article className="border-t border-ink/10">
+            <h2 className="eyebrow py-6">
+              <span className="h-px w-8 bg-ink/40" /> Proses
+            </h2>
+            <div className="divide-y divide-ink/10 border-t border-b border-ink/10">
+              {service.process.map((item, idx) => (
+                <div key={item.title} className="grid gap-6 py-8 md:grid-cols-[auto,1fr]">
+                  <span className="font-display text-sm text-sage-600">0{idx + 1}</span>
+                  <div>
+                    <h3 className="font-display text-2xl font-normal text-ink">{item.title}</h3>
+                    <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600 dark:text-brand-200">Benefit</p>
-              <ul className="space-y-2 text-brand-800 dark:text-slate-100">
+          </article>
+
+          <aside className="self-start border border-ink/10 bg-paper p-8">
+            <div className="border-b border-ink/10 pb-6">
+              <p className="text-[11px] uppercase tracking-eyebrow text-ink-muted">Estimasi selesai</p>
+              <p className="mt-3 font-display text-4xl font-normal italic text-copper-600">
+                {service.turnaround}
+              </p>
+            </div>
+            <div className="space-y-4 py-6">
+              <p className="text-[11px] uppercase tracking-eyebrow text-ink-muted">Yang Anda dapatkan</p>
+              <ul className="space-y-3 text-sm text-ink-soft">
                 {service.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-2">
-                    <span aria-hidden="true" className="mt-1 text-brand-600 dark:text-brand-200">
-                      •
-                    </span>
+                  <li key={benefit} className="flex items-baseline gap-3">
+                    <span aria-hidden className="text-sage-600">—</span>
                     <span>{benefit}</span>
                   </li>
                 ))}

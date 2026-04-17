@@ -6,134 +6,120 @@ const Hero = () => {
   const sectionRef = useScrollReveal<HTMLElement>();
   const scrollToPricing = () => {
     const target = document.getElementById("pricing");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    if (target) target.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="scroll-reveal relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white py-24 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950/80"
+      className="scroll-reveal relative overflow-hidden bg-cream pt-14 pb-24 sm:pt-20"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-hero-grid opacity-40 dark:opacity-60" />
-      <div className="container grid gap-16 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
-        <div className="space-y-10">
-          <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 px-4 py-1 text-xs font-semibold text-brand-600 ring-1 ring-brand-500/20 dark:text-brand-200">
-              Laundry On-demand Terpercaya
+      <div className="container">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <span className="eyebrow">
+              <span className="h-px w-10 bg-ink/40" />
+              Serpong · Sejak 2024
             </span>
-            <h1 className="text-4xl font-semibold leading-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
-              Solusi laundry premium
-              <span className="text-brand-500 dark:text-brand-300"> tanpa ribet</span> untuk rumah dan bisnis Anda.
+            <h1 className="mt-8 font-display text-[44px] font-normal leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[80px]">
+              Merawat pakaian
+              <br />
+              dengan <em className="font-display italic text-sage-600">ketelitian</em>
+              <br />
+              yang kami warisi.
             </h1>
-            <p className="max-w-xl text-lg text-slate-600 dark:text-slate-300">
-              Kami jemput cucian Anda, merawatnya dengan standar hotel bintang lima, dan
-              mengantarkan kembali tepat waktu. Cukup pesan dari aplikasi atau WhatsApp.
+            <p className="mt-10 max-w-xl text-lg leading-relaxed text-ink-soft">
+              Laundry antar-jemput di Rawa Buntu — ditangani tim yang sama sejak lima tahun lalu.
+              Kami mencuci dengan air yang disaring, deterjen lembut, dan mesin yang dirawat
+              berkala. Tidak cepat-cepat, tidak sembarangan.
             </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <Button href="https://wa.me/628999761125" target="_blank">Coba Gratis 1x</Button>
-            <Button variant="secondary" onClick={scrollToPricing}>
-              Lihat Paket
-            </Button>
-          </div>
-          <dl className="grid gap-6 text-sm text-slate-600 dark:text-slate-300 sm:grid-cols-3">
-            {heroStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-3xl border border-slate-200 bg-white/80 p-6 backdrop-blur dark:border-white/10 dark:bg-white/10"
-              >
-                <dt className="text-2xl font-semibold text-slate-900 dark:text-white">{stat.value}</dt>
-                <dd className="mt-2 text-sm text-slate-600 dark:text-slate-400">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="relative flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-md rounded-[32px] border border-slate-200 bg-white p-8 text-slate-900 shadow-section dark:border-white/10 dark:bg-white/10 dark:text-white">
-            <div className="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-brand-500/30 blur-2xl dark:bg-brand-500/20" />
-            <div className="absolute -bottom-12 -right-12 h-24 w-24 rounded-full bg-brand-300/30 blur-3xl dark:bg-brand-300/10" />
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-300">Paling Populer</p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Button href="https://wa.me/628999761125" target="_blank">
+                Jadwalkan Penjemputan
+              </Button>
+              <Button variant="ghost" onClick={scrollToPricing}>
+                Lihat daftar harga <span aria-hidden>↓</span>
+              </Button>
+            </div>
+
+            <dl className="mt-16 grid max-w-2xl grid-cols-3 gap-8 border-t border-ink/15 pt-8">
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-2">
+                  <dt className="font-display text-3xl font-medium text-ink sm:text-4xl">{stat.value}</dt>
+                  <dd className="text-xs uppercase tracking-eyebrow text-ink-muted">{stat.label}</dd>
                 </div>
-                <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-semibold text-brand-600 dark:text-brand-200">
-                  Cuci Komplit
-                </span>
-              </div>
-              <div className="space-y-4 rounded-3xl bg-slate-50 p-6 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
-                {["Reguler 6K/kg · Selesai 2 hari", "Satu Hari 8K/kg · Selesai 24 jam", "Kilat 10K/kg · Selesai 4 jam"].map(
-                  (item) => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-200">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 dark:bg-brand-500/20 dark:text-brand-200">
-                        <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                          <path
-                            d="M3.5 8.5 6.5 11.5 12.5 4.5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                      {item}
-                    </div>
-                  )
-                )}
-              </div>
-              <div className="space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                  Lokasi Outlet
-                </p>
-                <div className="overflow-hidden rounded-3xl ring-1 ring-slate-200 dark:ring-white/10">
+              ))}
+            </dl>
+          </div>
+
+          <aside className="lg:col-span-5">
+            <div className="relative">
+              <figure className="relative aspect-[4/5] overflow-hidden bg-cream-deep">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(94,117,72,0.18),_transparent_70%)]" />
+                <svg
+                  viewBox="0 0 400 500"
+                  className="absolute inset-0 h-full w-full"
+                  aria-hidden
+                >
+                  <defs>
+                    <pattern id="weave" width="8" height="8" patternUnits="userSpaceOnUse">
+                      <path d="M 0 4 L 8 4" stroke="rgba(28,24,20,0.07)" strokeWidth="1" />
+                      <path d="M 4 0 L 4 8" stroke="rgba(28,24,20,0.07)" strokeWidth="1" />
+                    </pattern>
+                  </defs>
+                  <rect width="400" height="500" fill="url(#weave)" />
+                  <g stroke="#1C1814" strokeWidth="1.2" fill="none" opacity="0.55">
+                    <path d="M90 120 Q 200 60 310 120 Q 280 220 310 380 Q 200 440 90 380 Q 120 220 90 120 Z" />
+                    <path d="M110 160 Q 200 110 290 160" />
+                    <path d="M110 340 Q 200 380 290 340" />
+                    <path d="M200 120 L 200 380" opacity="0.35" />
+                  </g>
+                  <g fill="#5E7548" opacity="0.3">
+                    <circle cx="140" cy="200" r="3" />
+                    <circle cx="260" cy="240" r="3" />
+                    <circle cx="180" cy="300" r="3" />
+                    <circle cx="240" cy="160" r="3" />
+                  </g>
+                </svg>
+                <figcaption className="absolute bottom-0 left-0 right-0 flex items-center justify-between border-t border-ink/15 bg-cream/80 px-5 py-4 backdrop-blur-sm">
+                  <span className="font-display text-sm italic text-ink">“setiap helai punya cerita”</span>
+                  <span className="text-[10px] uppercase tracking-eyebrow text-ink-muted">01 / 03</span>
+                </figcaption>
+              </figure>
+
+              <div className="mt-6 border border-ink/10 bg-paper p-5">
+                <p className="text-[11px] uppercase tracking-eyebrow text-ink-muted">Outlet</p>
+                <p className="mt-2 font-display text-lg text-ink">Rawa Buntu, Serpong</p>
+                <div className="mt-4 overflow-hidden border border-ink/10">
                   <iframe
-                    title="Makmur Laundry Location"
-                    src="https://www.google.com/maps?q=-6.3046522,106.6787781&z=16&output=embed"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="h-48 w-full"
-                    allowFullScreen
-                  />
-                  
-                 
-                </div>
-                 <div className="overflow-hidden rounded-3xl ring-1 ring-slate-200 dark:ring-white/10">
-                 <iframe
                     title="Makmur Laundry Location"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d311.75616812200116!2d106.67358413959151!3d-6.303958948003792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fb5b7ed15d95%3A0x543db4ce698d9bdb!2sMAKMUR%20LAUNDRY!5e1!3m2!1sid!2sid!4v1763708872104!5m2!1sid!2sid"
                     loading="lazy"
                     allowFullScreen
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-64 rounded-xl border-0"
+                    className="h-48 w-full border-0 grayscale contrast-[1.05]"
                   />
-
+                </div>
               </div>
-              </div>
-              {/* <div className="rounded-3xl bg-white/5 p-6 text-sm text-slate-300 ring-1 ring-white/10">
-                <p className="font-semibold text-white">Kurir dalam perjalanan</p>
-                <p className="mt-2 leading-relaxed">
-                  Andi akan menjemput cucian Anda pukul 09.30 di Jl. Melur No. 27. Mohon siapkan
-                  cucian dalam keranjang.
-                </p>
-              </div> */}
             </div>
+          </aside>
+        </div>
+
+        {/* <div className="mt-24 border-t border-ink/10 pt-10">
+          <p className="eyebrow mb-6">
+            <span className="h-px w-8 bg-ink/40" />
+            Dipercaya oleh
+          </p>
+          <div className="flex flex-wrap items-center gap-x-14 gap-y-4 font-display text-xl italic text-ink-muted">
+            {partnerLogos.map((partner, i) => (
+              <span key={partner} className="flex items-center gap-x-14">
+                {i > 0 && <span className="h-1 w-1 rounded-full bg-ink/30" aria-hidden />}
+                {partner}
+              </span>
+            ))}
           </div>
-        </div>
-      </div>
-      <div className="container mt-20 space-y-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">
-          Dipercaya oleh ratusan bisnis modern
-        </p>
-        <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-sm font-medium text-slate-400 dark:text-slate-500">
-          {partnerLogos.map((partner) => (
-            <span key={partner} className="uppercase tracking-[0.3em] text-slate-500">
-              {partner}
-            </span>
-          ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );
