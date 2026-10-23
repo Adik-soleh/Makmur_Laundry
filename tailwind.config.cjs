@@ -4,63 +4,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Biru logo Makmur Laundry
         brand: {
-          50: "#F2F4EE",
-          100: "#E1E7D7",
-          200: "#C3CFB0",
-          300: "#9BAF81",
-          400: "#7A9060",
-          500: "#5E7548",
-          600: "#4A5D39",
-          700: "#3A4A2D",
-          800: "#2A3621",
-          900: "#1C2416"
+          50: "#EAF2FB",
+          100: "#D5E5F6",
+          200: "#A9C9EC",
+          300: "#6FA3DC",
+          500: "#1A6FC4",
+          600: "#0E5AA7",
+          700: "#0B4886",
+          800: "#0A3A6B"
         },
-        ink: {
-          DEFAULT: "#1C1814",
-          soft: "#3A332B",
-          muted: "#6B6057"
+        navy: {
+          DEFAULT: "#0B2545",
+          soft: "#3B4F6B",
+          muted: "#5B6B80"
         },
-        cream: {
-          DEFAULT: "#F7F1E5",
-          light: "#FBF7EC",
-          deep: "#F0E7D3"
-        },
-        paper: "#FFFDF7",
-        stone: {
-          100: "#EFE7D6",
-          200: "#E2D5B8",
-          300: "#C9B88F",
-          400: "#A89470"
-        },
-        sage: {
-          50: "#F2F4EE",
-          100: "#E1E7D7",
-          200: "#C3CFB0",
-          300: "#9BAF81",
-          400: "#7A9060",
-          500: "#5E7548",
-          600: "#4A5D39",
-          700: "#3A4A2D",
-          800: "#2A3621",
-          900: "#1C2416"
-        },
-        copper: {
-          400: "#C78A5A",
-          500: "#B5704A",
-          600: "#98583A"
-        }
+        line: "#D8E4F0",
+        sun: "#FFD43B",
+        wa: "#15803D"
       },
       fontFamily: {
-        display: ["'Fraunces'", "'Cormorant Garamond'", "Georgia", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"]
-      },
-      letterSpacing: {
-        eyebrow: "0.32em"
-      },
-      boxShadow: {
-        card: "0 1px 2px rgba(28,24,20,0.04), 0 8px 24px -12px rgba(28,24,20,0.12)",
-        quiet: "0 1px 0 rgba(28,24,20,0.04)"
+        sans: ["'Plus Jakarta Sans Variable'", "system-ui", "-apple-system", "Segoe UI", "sans-serif"]
       }
     }
   },

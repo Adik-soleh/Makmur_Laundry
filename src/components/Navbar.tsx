@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { navigationLinks } from "../data/content";
+import { Link, useLocation } from "react-router-dom";
+import { navigationLinks, waLink } from "../data/content";
+import { WhatsAppIcon } from "./Icons";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -19,116 +20,63 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    if (href.startsWith("#")) {
-      const targetId = href.replace("#", "");
-      if (location.pathname !== "/") {
-        navigate("/", { state: { scrollTo: targetId } });
-        return;
-      }
-      const target = document.getElementById(targetId);
-      if (target) target.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-    navigate(href);
-  };
-
   return (
     <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        isScrolled ? "border-b border-ink/10 bg-cream/90 backdrop-blur-md" : "border-b border-transparent bg-transparent"
+      className={`sticky top-0 z-50 bg-white/95 backdrop-blur transition-shadow ${
+        isScrolled || isMenuOpen ? "shadow-[0_1px_0_#D8E4F0]" : ""
       }`}
     >
-      <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-baseline gap-1 font-display text-2xl font-medium tracking-tight text-ink">
-          Makmur
-          <span className="text-sm font-sans font-normal uppercase tracking-eyebrow text-ink-muted">Laundry</span>
-        </Link>
-        <nav className="hidden items-center gap-10 text-[13px] font-medium text-ink-soft lg:flex">
+      <div className="container flex h-16 items-center justify-between gap-6">
+        <Logo />
+        <nav aria-label="Navigasi utama" className="hidden items-center gap-8 md:flex">
           {navigationLinks.map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => handleNavClick(item.href)}
-              className="group relative bg-transparent py-1 text-ink-soft transition-colors hover:text-ink focus:outline-none focus-visible:text-ink"
+            <Link
+              key={item.href}
+              to={`/${item.href}`}
+              className="text-[15px] font-medium text-navy-soft transition-colors hover:text-brand-600"
             >
               {item.label}
-              <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-ink transition-transform duration-300 group-hover:scale-x-100" />
-            </button>
+            </Link>
           ))}
-        </nav>
-        {/* <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="https://wa.me/628999761125"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 border-b border-ink pb-1 text-[13px] font-medium text-ink transition-colors hover:text-sage-600 hover:border-sage-600"
-          >
-            Pesan Sekarang
-            <span aria-hidden>→</span>
+          <a href={waLink()} target="_blank" rel="noreferrer" className="btn-wa px-5 py-2.5 text-sm">
+            <WhatsAppIcon className="h-4 w-4" />
+            Chat WhatsApp
           </a>
-        </div> */}
+        </nav>
         <button
           type="button"
           aria-expanded={isMenuOpen}
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors hover:text-sage-600 lg:hidden"
           aria-controls="mobile-menu"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-navy md:hidden"
         >
-          <span className="sr-only">Buka menu</span>
-          <span className="relative flex h-5 w-6 items-center justify-center" aria-hidden="true">
-            <span
-              className={`absolute h-px w-6 bg-current transition-transform duration-300 ease-in-out ${
-                isMenuOpen ? "translate-y-0 rotate-45" : "-translate-y-[7px] rotate-0"
-              }`}
-            />
-            <span
-              className={`absolute h-px w-6 bg-current transition-all duration-200 ease-in-out ${
-                isMenuOpen ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute h-px w-6 bg-current transition-transform duration-300 ease-in-out ${
-                isMenuOpen ? "translate-y-0 -rotate-45" : "translate-y-[7px] rotate-0"
-              }`}
-            />
-          </span>
+          <span className="sr-only">{isMenuOpen ? "Tutup menu" : "Buka menu"}</span>
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
+            {isMenuOpen ? (
+              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            )}
+          </svg>
         </button>
       </div>
-      <div
-        aria-hidden={!isMenuOpen}
-        className={`overflow-hidden border-t border-ink/10 bg-cream transition-all duration-300 ease-out lg:hidden ${
-          isMenuOpen
-            ? "pointer-events-auto opacity-100 translate-y-0 max-h-[520px]"
-            : "pointer-events-none opacity-0 -translate-y-2 max-h-0"
-        }`}
-      >
-        <nav
-          id="mobile-menu"
-          className={`container flex flex-col gap-5 text-sm font-medium text-ink-soft transition-[padding] duration-300 ease-out ${
-            isMenuOpen ? "py-8" : "py-0"
-          }`}
-        >
-          {navigationLinks.map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => handleNavClick(item.href)}
-              className="bg-transparent text-left text-ink-soft transition-colors hover:text-ink focus:outline-none"
-            >
-              {item.label}
-            </button>
-          ))}
-          {/* <a
-            href="https://wa.me/628999761125"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex w-fit items-center gap-2 border-b border-ink pb-1 text-sm font-medium text-ink"
-          >
-            Pesan Sekarang <span aria-hidden>→</span>
-          </a> */}
+      {isMenuOpen && (
+        <nav id="mobile-menu" aria-label="Navigasi utama" className="container pb-5 md:hidden">
+          <ul className="divide-y divide-line border-y border-line">
+            {navigationLinks.map((item) => (
+              <li key={item.href}>
+                <Link to={`/${item.href}`} className="block py-3.5 text-base font-medium text-navy">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a href={waLink()} target="_blank" rel="noreferrer" className="btn-wa mt-4 w-full">
+            <WhatsAppIcon />
+            Chat WhatsApp
+          </a>
         </nav>
-      </div>
+      )}
     </header>
   );
 };

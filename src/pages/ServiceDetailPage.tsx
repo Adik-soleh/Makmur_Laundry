@@ -1,110 +1,103 @@
-import { useMemo } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button";
-import SectionHeading from "../components/SectionHeading";
-import { services } from "../data/content";
+import { Link, useParams } from "react-router-dom";
+import { WhatsAppIcon } from "../components/Icons";
+import { business, rupiah, services, waLink } from "../data/content";
+import usePageMeta from "../hooks/usePageMeta";
+import { serviceMeta } from "../seo";
+import NotFoundPage from "./NotFoundPage";
 
 const ServiceDetailPage = () => {
-  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const service = services.find((item) => item.slug === slug);
+  if (!service) return <NotFoundPage />;
+  return <ServiceDetail service={service} />;
+};
 
-  const service = useMemo(
-    () => services.find((item) => item.slug === slug),
-    [slug]
-  );
-
-  if (!service) {
-    return (
-      <section className="bg-cream py-28">
-        <div className="container space-y-8 text-center text-ink-soft">
-          <h1 className="font-display text-4xl font-normal text-ink">Layanan tidak ditemukan</h1>
-          <p className="text-sm text-ink-muted">
-            Silakan pilih layanan yang tersedia melalui halaman utama kami.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button to="/">Kembali ke Beranda</Button>
-            <Button variant="secondary" onClick={() => navigate(-1)}>
-              Halaman Sebelumnya
-            </Button>
-          </div>
-        </div>
-      </section>
-    );
-  }
+const ServiceDetail = ({ service }: { service: (typeof services)[number] }) => {
+  usePageMeta(serviceMeta(service));
+  const others = services.filter((item) => item.slug !== service.slug);
 
   return (
-    <section className="bg-cream py-20 sm:py-28">
-      <div className="container space-y-14">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-soft transition-colors hover:text-ink"
-        >
-          <span aria-hidden="true">←</span> Kembali ke beranda
+    <div className="container pb-16 pt-8 lg:pb-24">
+      <nav aria-label="Breadcrumb" className="text-sm text-navy-muted">
+        <Link to="/" className="hover:text-brand-600">
+          Beranda
         </Link>
+        <span aria-hidden="true" className="mx-2">/</span>
+        <span className="text-navy">{service.title}</span>
+      </nav>
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8">
-            <SectionHeading
-              align="left"
-              eyebrow={`Layanan · ${service.slug.replace(/-/g, " ")}`}
-              title={service.title}
-              description={service.longDescription}
-            />
-          </div>
-          <p className="text-sm text-ink-muted lg:col-span-4 lg:pb-4">
-            Setiap tahapan dikerjakan oleh tim yang sama, diawasi langsung oleh pemilik outlet.
-          </p>
+      <div className="mt-8 grid gap-12 lg:grid-cols-12 lg:gap-14">
+        <div className="lg:col-span-7">
+          <h1 className="text-4xl font-extrabold leading-tight tracking-[-0.02em] sm:text-5xl">
+            {service.title} di {business.area}
+          </h1>
+          {service.intro.map((paragraph) => (
+            <p key={paragraph} className="mt-5 max-w-[38rem] text-lg leading-relaxed text-navy-soft">
+              {paragraph}
+            </p>
+          ))}
+          <dl className="mt-8 grid max-w-[38rem] gap-4 sm:grid-cols-2">
+            <div className="rounded-[20px] bg-brand-50 p-5">
+              <dt className="text-sm text-navy-muted">Lama pengerjaan</dt>
+              <dd className="mt-1 font-bold">{service.turnaround}</dd>
+            </div>
+            <div className="rounded-[20px] bg-brand-50 p-5">
+              <dt className="text-sm text-navy-muted">Antar-jemput</dt>
+              <dd className="mt-1 font-bold">Gratis, pesan lewat WhatsApp</dd>
+            </div>
+          </dl>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.6fr,1fr] lg:gap-14">
-          <article className="border-t border-ink/10">
-            <h2 className="eyebrow py-6">
-              <span className="h-px w-8 bg-ink/40" /> Proses
+        <section aria-labelledby="harga-layanan" className="lg:col-span-5">
+          <div className="rounded-[28px] border-2 border-brand-600 p-6 sm:p-8">
+            <h2 id="harga-layanan" className="text-2xl font-extrabold tracking-tight">
+              Harga
             </h2>
-            <div className="divide-y divide-ink/10 border-t border-b border-ink/10">
-              {service.process.map((item, idx) => (
-                <div key={item.title} className="grid gap-6 py-8 md:grid-cols-[auto,1fr]">
-                  <span className="font-display text-sm text-sage-600">0{idx + 1}</span>
-                  <div>
-                    <h3 className="font-display text-2xl font-normal text-ink">{item.title}</h3>
-                    <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+            <ul className="mt-5 space-y-3">
+              {service.prices.map((item) => (
+                <li key={item.name} className="leader">
+                  <span>{item.name}</span>
+                  <span className="font-bold tabular-nums">
+                    {rupiah(item.price)}
+                    {item.unit && <span className="font-normal text-navy-muted">/{item.unit}</span>}
+                  </span>
+                </li>
               ))}
-            </div>
-          </article>
-
-          <aside className="self-start border border-ink/10 bg-paper p-8">
-            <div className="border-b border-ink/10 pb-6">
-              <p className="text-[11px] uppercase tracking-eyebrow text-ink-muted">Estimasi selesai</p>
-              <p className="mt-3 font-display text-4xl font-normal italic text-copper-600">
-                {service.turnaround}
-              </p>
-            </div>
-            <div className="space-y-4 py-6">
-              <p className="text-[11px] uppercase tracking-eyebrow text-ink-muted">Yang Anda dapatkan</p>
-              <ul className="space-y-3 text-sm text-ink-soft">
-                {service.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-baseline gap-3">
-                    <span aria-hidden className="text-sage-600">—</span>
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Button
-              className="w-full"
-              href="https://wa.me/628999761125?text=Halo,%20saya%20ingin%20diskusikan%20layanan."
+            </ul>
+            {service.notes.length > 0 && (
+              <p className="mt-5 text-sm text-navy-muted">{service.notes.join(" ")}</p>
+            )}
+            <a
+              href={waLink(`Halo Makmur Laundry, saya mau pesan ${service.title.toLowerCase()}.`)}
               target="_blank"
+              rel="noreferrer"
+              className="btn-wa mt-6 w-full"
             >
-              Diskusikan Layanan
-            </Button>
-          </aside>
-        </div>
+              <WhatsAppIcon />
+              Pesan lewat WhatsApp
+            </a>
+          </div>
+        </section>
       </div>
-    </section>
+
+      <section aria-labelledby="layanan-lain" className="mt-16 border-t border-line pt-10">
+        <h2 id="layanan-lain" className="text-xl font-bold">
+          Layanan lain
+        </h2>
+        <ul className="mt-4 flex flex-wrap gap-3">
+          {others.map((item) => (
+            <li key={item.slug}>
+              <Link
+                to={`/layanan/${item.slug}`}
+                className="inline-flex rounded-full border border-line px-4 py-2 text-[15px] font-medium hover:border-brand-600 hover:text-brand-600"
+              >
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 };
 

@@ -1,247 +1,269 @@
+// Harga & durasi mengikuti master layanan di POS (outlet Makmur Laundry).
+// Ubah di sini kalau harga di kasir berubah, lalu build ulang.
+
+export const business = {
+  name: "Makmur Laundry",
+  tagline: "Bersih dan murah",
+  area: "Rawa Buntu, Serpong",
+  address:
+    "Jl. Kp. Dadap Barat, RT.1/RW.3, Rw. Buntu, Kec. Serpong, Kota Tangerang Selatan, Banten 15310",
+  streetAddress: "Jl. Kp. Dadap Barat, RT.1/RW.3, Rawa Buntu",
+  locality: "Serpong",
+  region: "Banten",
+  postalCode: "15310",
+  // Titik pin "MAKMUR LAUNDRY" di Google Maps (sama dengan embed peta).
+  geo: { lat: -6.303959, lng: 106.673584 },
+  phone: "628999761125",
+  phoneDisplay: "0899-9761-125",
+  // Sama dengan jam buka di Google Business.
+  hours: { opens: "07:00", closes: "22:00", label: "Setiap hari, 07.00–22.00" },
+  email: "halo@MakmurLaundry.id",
+  instagram:
+    "https://www.instagram.com/makmur_laundry_bsd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+  mapsEmbed:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d311.75616812200116!2d106.67358413959151!3d-6.303958948003792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fb5b7ed15d95%3A0x543db4ce698d9bdb!2sMAKMUR%20LAUNDRY!5e1!3m2!1sid!2sid!4v1763708872104!5m2!1sid!2sid",
+  mapsLink: "https://www.google.com/maps/dir/?api=1&destination=-6.303959,106.673584",
+  paymentMethods: ["Tunai", "Transfer BCA", "QRIS"],
+  minKiloanKg: 3,
+  // Angka dari data nota POS (Juni–Oktober 2026). Perbarui sesekali.
+  stats: {
+    customers: "500+",
+    ordersPerMonth: "600+"
+  }
+};
+
+export const waLink = (text?: string) =>
+  `https://wa.me/${business.phone}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+
 export const navigationLinks = [
-  { label: "Layanan", href: "#services" },
-  { label: "Cara Kerja", href: "#workflow" },
-  { label: "Keunggulan", href: "#benefits" },
-  { label: "Paket", href: "#pricing" },
-  { label: "Testimoni", href: "#testimonials" },
-  { label: "Kontak", href: "#contact" }
+  { label: "Harga", href: "#harga" },
+  { label: "Satuan", href: "#satuan" },
+  { label: "Cara pesan", href: "#cara-pesan" },
+  { label: "Lokasi", href: "#lokasi" }
 ];
 
-export const heroStats = [
-  { label: "Pesanan selesai", value: "125K+" },
-  { label: "Pelanggan aktif", value: "18K" },
-  { label: "Rating pelanggan", value: "4.9/5" }
+export type Speed = { key: string; name: string; duration: string; extra: number };
+
+export const speeds: Speed[] = [
+  { key: "reguler", name: "Reguler", duration: "2 hari", extra: 0 },
+  { key: "express", name: "Express", duration: "24 jam", extra: 2000 },
+  { key: "kilat", name: "Kilat", duration: "4 jam", extra: 4000 }
 ];
 
-export const partnerLogos = ["CleanExpress", "LaundryHub", "FreshWave", "SpinCycle"];
+export const kiloan = [
+  { name: "Cuci Komplit", detail: "Cuci, kering, setrika", price: 6000 },
+  { name: "Cuci Lipat", detail: "Cuci, kering, lipat", price: 5000 },
+  { name: "Setrika", detail: "Setrika saja", price: 5000 }
+];
 
-export const services = [
+export const rupiah = (value: number) => `Rp${value.toLocaleString("id-ID")}`;
+
+export type PriceItem = { name: string; price: number; unit?: string };
+
+export const satuanGroups: { title: string; note?: string; items: PriceItem[] }[] = [
   {
-    slug: "laundry-kiloan",
-    title: "Laundry Kiloan",
-    description: "Cucian harian bersih, wangi, dan terlipat rapi dengan layanan antar-jemput gratis.",
-    icon: "laundry",
-    longDescription:
-      "Laundry kiloan MakmurLaundry dirancang untuk kebutuhan harian keluarga maupun kos. Kami menggunakan deterjen food grade, pelembut hipoalergenik, dan mesin industri yang dibersihkan secara berkala guna memastikan higienitas.",
-    process: [
-      {
-        title: "Penjemputan Terjadwal",
-        description:
-          "Kurir kami tiba sesuai jam penjemputan, melakukan pengecekan singkat, lalu menimbang cucian tanpa biaya tambahan."
-      },
-      {
-        title: "Pencucian dan Pengeringan",
-        description:
-          "Proses cuci menggunakan mesin berkapasitas besar dengan pemisahan berdasarkan warna dan jenis kain untuk menjaga kualitas."
-      },
-      {
-        title: "Penyetrikaan dan Pengemasan",
-        description:
-          "Setrika uap memastikan pakaian rapi bebas kusut, kemudian dikemas dalam packaging breathable agar tetap segar saat diterima."
-      }
-    ],
-    benefits: [
-      "Gratis antar-jemput untuk radius 10 km",
-      "Parfum premium tahan hingga 7 hari",
-      "Layanan ekspres tersedia (8 jam selesai)"
-    ],
-    turnaround: "12 - 24 jam"
+    title: "Sprai & bedcover",
+    items: [
+      { name: "Sprai kecil", price: 10000 },
+      { name: "Sprai sedang + sarung bantal", price: 13000 },
+      { name: "Sprai besar", price: 15000 },
+      { name: "Bedcover sedang", price: 20000 },
+      { name: "Bedcover besar", price: 30000 },
+      { name: "Bedcover jumbo", price: 40000 }
+    ]
   },
   {
-    slug: "dry-cleaning-premium",
-    title: "Dry Cleaning Premium",
-    description: "Perawatan khusus untuk pakaian formal, batik, dan bahan sensitif oleh tenaga profesional.",
-    icon: "dry",
-    longDescription:
-      "Dry cleaning premium fokus pada pakaian dengan material sensitif seperti sutra, wool, dan batik eksklusif. Kami menggunakan pelarut ramah lingkungan dan menjaga suhu agar serat kain tetap awet.",
-    process: [
-      {
-        title: "Inspeksi Detail",
-        description:
-          "Tim quality control memeriksa label perawatan, jenis noda, dan struktur kain untuk menentukan formula terbaik."
-      },
-      {
-        title: "Dry Cleaning Khusus",
-        description:
-          "Proses pembersihan menggunakan mesin khusus dengan pelarut cair berkualitas tinggi dan siklus yang disesuaikan."
-      },
-      {
-        title: "Finishing Profesional",
-        description:
-          "Pakaian disetrika profesional, diberi cover pelindung, dan digantung agar bentuk tetap presisi sampai diterima."
-      }
+    title: "Selimut & handuk",
+    items: [
+      { name: "Handuk kecil", price: 3000 },
+      { name: "Handuk besar", price: 5000 },
+      { name: "Selimut tipis", price: 7000 },
+      { name: "Selimut sedang", price: 10000 },
+      { name: "Selimut besar", price: 15000 }
+    ]
+  },
+  {
+    title: "Pakaian khusus",
+    items: [
+      { name: "Mukena", price: 10000 },
+      { name: "Jaket", price: 15000 },
+      { name: "Celana bahan", price: 16000 },
+      { name: "Gamis", price: 20000 },
+      { name: "Kebaya", price: 20000 },
+      { name: "Jas", price: 20000 }
+    ]
+  },
+  {
+    title: "Sepatu, tas & boneka",
+    note: "Selesai 3–4 hari",
+    items: [
+      { name: "Sepatu", price: 15000, unit: "pasang" },
+      { name: "Sepatu putih", price: 20000, unit: "pasang" },
+      { name: "Tas kecil", price: 10000 },
+      { name: "Tas besar", price: 25000 },
+      { name: "Boneka kecil", price: 10000 },
+      { name: "Boneka besar", price: 30000 }
+    ]
+  },
+  {
+    title: "Karpet & gorden",
+    note: "Karpet tebal selesai ±4 hari",
+    items: [
+      { name: "Karpet", price: 15000, unit: "meter" },
+      { name: "Karpet kecil", price: 40000 },
+      { name: "Karpet sedang", price: 45000 },
+      { name: "Karpet besar", price: 85000 },
+      { name: "Gorden", price: 20000 },
+      { name: "Taplak meja", price: 15000 }
+    ]
+  }
+];
+
+export const orderSteps = [
+  {
+    title: "Chat atau mampir",
+    description:
+      "Kirim pesan WhatsApp untuk minta dijemput, atau bawa langsung cucian ke outlet di Rawa Buntu."
+  },
+  {
+    title: "Ditimbang, dapat nota",
+    description:
+      "Cucian ditimbang atau dihitung per item. Di nota tertulis total bayar dan kapan selesai."
+  },
+  {
+    title: "Ambil atau kami antar",
+    description: "Kami kabari lewat WhatsApp begitu selesai. Bayar tunai, transfer BCA, atau QRIS."
+  }
+];
+
+export type ServicePage = {
+  slug: string;
+  title: string;
+  /** Judul halaman untuk mesin pencari. */
+  seoTitle: string;
+  seoDescription: string;
+  summary: string;
+  intro: string[];
+  prices: PriceItem[];
+  turnaround: string;
+  notes: string[];
+};
+
+export const services: ServicePage[] = [
+  {
+    slug: "laundry-kiloan",
+    title: "Laundry kiloan",
+    seoTitle: "Laundry Kiloan Rawa Buntu Serpong, mulai Rp5.000/kg",
+    seoDescription:
+      "Laundry kiloan di Rawa Buntu, Serpong: cuci komplit Rp6.000/kg, cuci lipat dan setrika Rp5.000/kg. Reguler 2 hari, express 24 jam, kilat 4 jam.",
+    summary: "Cuci komplit, cuci lipat, atau setrika saja. Dihitung per kilo, minimal 3 kg.",
+    intro: [
+      "Cucian harian ditimbang per kilo. Pilih cuci komplit kalau ingin langsung rapi disetrika, cuci lipat kalau cukup bersih dan terlipat, atau setrika saja untuk pakaian yang sudah dicuci di rumah.",
+      "Butuh cepat? Pilih Express (selesai 24 jam, tambah Rp2.000/kg) atau Kilat (selesai 4 jam, tambah Rp4.000/kg)."
     ],
-    benefits: [
-      "Menjaga warna dan tekstur kain premium",
-      "Garansi anti susut dan anti pudar",
-      "Pengecekan ulang sebelum pengemasan"
+    prices: [
+      { name: "Cuci Komplit", price: 6000, unit: "kg" },
+      { name: "Cuci Lipat", price: 5000, unit: "kg" },
+      { name: "Setrika", price: 5000, unit: "kg" }
     ],
-    turnaround: "24 jam"
+    turnaround: "2 hari, 24 jam, atau 4 jam",
+    notes: ["Minimal 3 kg per nota.", "Harga untuk layanan reguler 2 hari."]
   },
   {
     slug: "cuci-linen",
-    title: "Cuci Sprei & Bedcover",
-    description: "Seprai, bedcover, dan selimut dicuci dengan deterjen hipoalergenik agar tetap higienis.",
-    icon: "linen",
-    longDescription:
-      "Linen care MakmurLaundry menggunakan bahan pembersih hipoalergenik yang aman untuk kulit sensitif sehingga ideal bagi keluarga dan bisnis hospitality.",
-    process: [
-      {
-        title: "Pre-treatment Noda",
-        description:
-          "Semua noda membandel dan area bernoda dipre-treatment manual untuk memastikan hasil maksimal."
-      },
-      {
-        title: "Cuci Kapasitas Besar",
-        description:
-          "Proses cuci dilakukan dengan mesin industrial yang menjaga serat tetap lembut dan tidak melar."
-      },
-      {
-        title: "Penyetrikaan Flatwork",
-        description:
-          "Mesin flatwork ironer memastikan sprei dan bedcover bebas kusut serta terlipat rapi sesuai standar hotel."
-      }
+    title: "Sprai, bedcover & selimut",
+    seoTitle: "Cuci Sprai, Bedcover & Selimut di Serpong",
+    seoDescription:
+      "Cuci sprai mulai Rp10.000, bedcover mulai Rp20.000, selimut mulai Rp7.000 di Makmur Laundry Rawa Buntu, Serpong.",
+    summary: "Dihitung per item sesuai ukuran. Sprai bisa sekalian dengan sarung bantal.",
+    intro: [
+      "Barang besar seperti bedcover dan selimut tebal dicuci terpisah dari cucian kiloan dan dihitung per item sesuai ukurannya.",
+      "Untuk sprai, ada paket sekalian dengan sarung bantal."
     ],
-    benefits: [
-      "Pakai deterjen hipoalergenik",
-      "Gratis fold & pack sesuai permintaan",
-      "Ideal untuk apartemen, kos, dan hotel"
+    prices: [
+      { name: "Sprai kecil", price: 10000 },
+      { name: "Sprai sedang + sarung bantal", price: 13000 },
+      { name: "Sprai besar + sarung bantal", price: 15000 },
+      { name: "Bedcover sedang", price: 20000 },
+      { name: "Bedcover besar", price: 30000 },
+      { name: "Bedcover jumbo", price: 40000 },
+      { name: "Selimut tipis", price: 7000 },
+      { name: "Selimut sedang", price: 10000 },
+      { name: "Selimut besar", price: 15000 }
     ],
-    turnaround: "24 - 36 jam"
+    turnaround: "2 hari, bisa express 1 hari",
+    notes: ["Harga untuk layanan reguler 2 hari."]
+  },
+  {
+    slug: "cuci-satuan",
+    title: "Pakaian khusus & satuan",
+    seoTitle: "Cuci Jas, Kebaya, Gamis & Pakaian Satuan di Serpong",
+    seoDescription:
+      "Cuci satuan untuk jas, kebaya, gamis, jaket, mukena, dan celana bahan di Makmur Laundry Rawa Buntu, Serpong. Mulai Rp10.000 per item.",
+    summary: "Jas, kebaya, gamis, jaket, dan pakaian lain yang dikerjakan per item.",
+    intro: [
+      "Pakaian yang tidak cocok dicampur cucian kiloan kami kerjakan per item: jas, kebaya, gamis, jaket, celana bahan, sampai mukena.",
+      "Sebagian besar item bisa express (1 hari) atau kilat."
+    ],
+    prices: [
+      { name: "Mukena", price: 10000 },
+      { name: "Jaket", price: 15000 },
+      { name: "Celana bahan", price: 16000 },
+      { name: "Gamis", price: 20000 },
+      { name: "Dress", price: 20000 },
+      { name: "Kebaya", price: 20000 },
+      { name: "Jas", price: 20000 },
+      { name: "Seragam", price: 20000 }
+    ],
+    turnaround: "2 hari, bisa express 1 hari",
+    notes: ["Harga untuk layanan reguler 2 hari."]
   },
   {
     slug: "perawatan-sepatu-tas",
-    title: "Sepatu & Tas",
-    description: "Treatment khusus untuk menjaga bentuk dan warna sepatu serta tas favorit Anda.",
-    icon: "shoe",
-    longDescription:
-      "Perawatan sepatu dan tas mencakup pembersihan mendalam hingga detailing finishing untuk menjaga bentuk, warna, serta material tetap prima.",
-    process: [
-      {
-        title: "Pemeriksaan Material",
-        description:
-          "Material dianalisis untuk menentukan teknik pembersihan terbaik, mulai dari suede, kulit, hingga canvas."
-      },
-      {
-        title: "Detailing Manual",
-        description:
-          "Setiap bagian dibersihkan manual menggunakan brush khusus dan cairan premium agar noda hilang tanpa merusak bahan."
-      },
-      {
-        title: "Finishing & Proteksi",
-        description:
-          "Aplikasi pelindung anti air dan anti noda menjaga sepatu dan tas tetap fresh, disertai bentuk yang dipertahankan dengan shoe tree."
-      }
+    title: "Sepatu, tas & boneka",
+    seoTitle: "Cuci Sepatu, Tas & Boneka di Serpong",
+    seoDescription:
+      "Cuci sepatu mulai Rp15.000/pasang, tas mulai Rp10.000, boneka mulai Rp10.000 di Makmur Laundry Rawa Buntu, Serpong. Selesai 3–4 hari.",
+    summary: "Dibersihkan per item, selesai 3–4 hari.",
+    intro: [
+      "Sepatu, tas, dan boneka dibersihkan per item. Sepatu putih dihitung terpisah karena butuh perhatian lebih.",
+      "Pengerjaan 3–4 hari supaya bahan kering sempurna sebelum diambil."
     ],
-    benefits: [
-      "Pembersihan mendalam tanpa merusak bahan",
-      "Proteksi tambahan anti air untuk material kulit",
-      "Gratis pergantian tali standar bila diperlukan"
+    prices: [
+      { name: "Sepatu", price: 15000, unit: "pasang" },
+      { name: "Sepatu putih", price: 20000, unit: "pasang" },
+      { name: "Sandal", price: 10000, unit: "pasang" },
+      { name: "Tas kecil", price: 10000 },
+      { name: "Tas sedang", price: 15000 },
+      { name: "Tas besar", price: 25000 },
+      { name: "Boneka kecil", price: 10000 },
+      { name: "Boneka sedang", price: 20000 },
+      { name: "Boneka besar", price: 30000 }
     ],
-    turnaround: "48 jam"
+    turnaround: "3–4 hari",
+    notes: []
+  },
+  {
+    slug: "cuci-karpet",
+    title: "Karpet & gorden",
+    seoTitle: "Cuci Karpet & Gorden di Serpong, BSD",
+    seoDescription:
+      "Cuci karpet Rp15.000/meter atau per lembar mulai Rp40.000, gorden Rp20.000 di Makmur Laundry Rawa Buntu, Serpong.",
+    summary: "Karpet per meter atau per lembar, gorden dan taplak per item.",
+    intro: [
+      "Karpet bisa dihitung per meter atau per lembar sesuai ukuran. Karpet tebal butuh sekitar 4 hari sampai benar-benar kering.",
+      "Gorden dan taplak meja dihitung per item."
+    ],
+    prices: [
+      { name: "Karpet", price: 15000, unit: "meter" },
+      { name: "Karpet kecil", price: 40000 },
+      { name: "Karpet sedang", price: 45000 },
+      { name: "Karpet tebal 2×1,5 m", price: 50000 },
+      { name: "Karpet besar", price: 85000 },
+      { name: "Gorden", price: 20000 },
+      { name: "Taplak meja", price: 15000 }
+    ],
+    turnaround: "2–4 hari, tergantung ketebalan",
+    notes: []
   }
 ];
-
-export const workflow = [
-  {
-    step: "1",
-    title: "Pesan Jadwal",
-    description: "Pilih layanan dan tentukan jadwal penjemputan langsung dari aplikasi atau WhatsApp."
-  },
-  {
-    step: "2",
-    title: "Proses Profesional",
-    description: "Tim kami mencuci, mengeringkan, dan menyetrika pakaian Anda sesuai SOP dan standar kebersihan."
-  },
-  {
-    step: "3",
-    title: "Antar Tepat Waktu",
-    description: "Cucian dikemas rapi dan diantar kembali ke alamat Anda tepat waktu, siap langsung dipakai."
-  }
-];
-
-export const benefits = [
-  {
-    title: "Garansi Kebersihan",
-    description:
-      "Proses pencucian menggunakan mesin industri, deterjen food grade, dan air yang difiltrasi sehingga pakaian terjamin higienis."
-  },
-  {
-    title: "Realtime Tracking",
-    description:
-      "Pantau status cucian Anda dari penjemputan hingga pengantaran melalui dashboard pelanggan atau chatbot WhatsApp."
-  },
-  {
-    title: "Support 7 Hari",
-    description:
-      "Customer success kami siap membantu setiap hari. Ajukan komplain, perubahan jadwal, atau permintaan khusus dengan mudah."
-  }
-];
-
-export const pricingPlans = [
-  {
-    name: "Cuci Komplit",
-    price: "Mulai 6K / kg",
-    tagline: "Cuci, kering, setrika dengan layanan reguler hingga kilat.",
-    highlights: [
-      "Reguler 6K/kg · Selesai 2 hari",
-      "Satu Hari 8K/kg · Selesai 24 jam",
-      "Kilat 10K/kg · Selesai 4 jam"
-    ]
-  },
-  {
-    name: "Setrika",
-    price: "Mulai 3K / kg",
-    tagline: "Hanya setrika dengan pilihan reguler, satu hari, hingga kilat.",
-    highlights: [
-      "Reguler 3K/kg · Selesai 2 hari",
-      "Satu Hari 5K/kg · Selesai 24 jam",
-      "Kilat 7K/kg · Selesai 4 jam"
-    ]
-  },
-  {
-    name: "Cuci Lipat",
-    price: "Mulai 3K / kg",
-    tagline: "Cuci, kering, lipat untuk kebutuhan harian keluarga.",
-    highlights: [
-      "Reguler 3K/kg · Selesai 2 hari",
-      "Satu Hari 5K/kg · Selesai 24 jam",
-      "Kilat 7K/kg · Selesai 4 jam"
-    ]
-  }
-];
-
-export const testimonials = [
-  {
-    name: "Dewi Sri Mulyani",
-    role: "CEO",
-    quote:
-      "Layanan MakmurLaundry sangat membantu operasional harian. Cucian selalu tepat waktu dan tim support sigap ketika ada permintaan tambahan."
-  },
-  {
-    name: "Muhammad Arifin",
-    role: "Product Manager",
-    quote:
-      "Seluruh pakaian kerja saya ditangani di sini. Wangi tahan lama dan tidak pernah ada pakaian hilang. Tracking statusnya juga transparan sekali."
-  },
-  {
-    name: "Siska Julianti",
-    role: "Ibu Rumah Tangga",
-    quote:
-      "Sangat praktis! Tinggal pesan, kurir datang menjemput dan mengantarkan kembali. Harga bersaing dengan hasil yang maksimal."
-  }
-];
-
-export const contactInfo = {
-  address: "Jl. Palm Sulur III, Blok BK No.22, BSD - Tangerang Selatan",
-  phone: "628999761125",
-  email: "halo@MakmurLaundry.id",
-  socials: [
-    {
-      label: "Instagram",
-      href: "https://www.instagram.com/makmur_laundry_bsd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-    },
-    { label: "LinkedIn", href: "https://linkedin.com/company/MakmurLaundry" },
-    { label: "WhatsApp", href: "https://wa.me/628999761125" }
-  ]
-};
