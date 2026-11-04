@@ -1,7 +1,7 @@
 import { business, kiloan, services, type ServicePage } from "./data/content";
 
 /** Domain kanonik. Set VITE_SITE_URL di env Vercel saat pindah domain. */
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://makmurlaundry.vercel.app").replace(
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://makmurlaundry.akaworks.space").replace(
   /\/+$/,
   ""
 );
