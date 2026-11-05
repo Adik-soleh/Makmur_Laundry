@@ -47,12 +47,12 @@ const localBusiness = () => ({
     addressCountry: "ID"
   },
   geo: { "@type": "GeoCoordinates", latitude: business.geo.lat, longitude: business.geo.lng },
-  hasMap: business.mapsLink,
-  areaServed: ["Rawa Buntu", "Serpong", "BSD City", "Tangerang Selatan"].map((name) => ({
+  hasMap: business.mapsPlace,
+  areaServed: [...business.areaServed, "Tangerang Selatan"].map((name) => ({
     "@type": "Place",
     name
   })),
-  sameAs: [business.instagram],
+  sameAs: [business.mapsPlace, business.instagram.split("?")[0]],
   makesOffer: kiloan.map((item) => ({
     "@type": "Offer",
     name: item.name,

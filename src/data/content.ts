@@ -23,6 +23,10 @@ export const business = {
   mapsEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d311.75616812200116!2d106.67358413959151!3d-6.303958948003792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fb5b7ed15d95%3A0x543db4ce698d9bdb!2sMAKMUR%20LAUNDRY!5e1!3m2!1sid!2sid!4v1763708872104!5m2!1sid!2sid",
   mapsLink: "https://www.google.com/maps/dir/?api=1&destination=-6.303959,106.673584",
+  // Halaman profil Google Maps (CID dari embed: 0x543db4ce698d9bdb). Menghubungkan situs ke Google Business.
+  mapsPlace: "https://maps.google.com/?cid=6070206671392447451",
+  // Area yang dilayani antar-jemput. Samakan dengan "Area layanan" di Google Business.
+  areaServed: ["Rawa Buntu", "Rawa Mekar Jaya", "Lengkong Gudang", "Ciater", "Cilenggang", "Serpong", "BSD City"],
   paymentMethods: ["Tunai", "Transfer BCA", "QRIS"],
   minKiloanKg: 3,
   // Angka dari data nota POS (Juni–Oktober 2026). Perbarui sesekali.

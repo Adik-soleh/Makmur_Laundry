@@ -166,7 +166,7 @@ const LandingPage = () => {
         <div className="container grid gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <h2 id="lokasi-title" className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Mampir ke outlet
+              Laundry terdekat di Rawa Buntu, Serpong
             </h2>
             <address className="mt-6 flex gap-3 text-lg not-italic leading-relaxed text-navy-soft">
               <PinIcon className="mt-1 h-5 w-5 shrink-0 text-brand-600" />
@@ -193,6 +193,12 @@ const LandingPage = () => {
                 Minta dijemput
               </a>
             </div>
+            <p className="mt-6 text-navy-soft">
+              Antar-jemput gratis untuk warga {business.areaServed.join(", ")}.{" "}
+              <a href={business.mapsPlace} target="_blank" rel="noreferrer" className="font-semibold text-brand-600 hover:underline">
+                Lihat ulasan kami di Google Maps
+              </a>
+            </p>
           </div>
           <LocationMap />
         </div>
