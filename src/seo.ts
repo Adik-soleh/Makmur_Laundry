@@ -109,9 +109,9 @@ const servicePage = (service: ServicePage) => {
 
 export const homeMeta = (): PageMeta => ({
   path: "/",
-  title: "Makmur Laundry Rawa Buntu, Serpong | Laundry Kiloan Bersih dan Murah",
+  title: "Laundry Terdekat Rawa Buntu, Serpong & BSD | Makmur Laundry",
   description:
-    "Laundry kiloan di Rawa Buntu, Serpong. Cuci komplit Rp6.000/kg, selesai 2 hari atau kilat 4 jam. Antar-jemput gratis, buka setiap hari 07.00–22.00.",
+    "Laundry terdekat di Rawa Buntu, Serpong & BSD. Kiloan cuci komplit Rp6.000/kg, selesai 2 hari atau kilat 4 jam. Antar-jemput gratis, buka setiap hari 07.00–22.00.",
   jsonLd: [localBusiness()]
 });
 

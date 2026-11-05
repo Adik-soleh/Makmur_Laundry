@@ -21,7 +21,7 @@ const LandingPage = () => {
             Rawa Buntu, Serpong
           </p>
           <h1 className="mt-4 max-w-[14ch] text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-navy sm:text-6xl lg:text-[4.25rem]">
-            Laundry bersih dan murah, dekat rumah.
+            Laundry terdekat, bersih dan murah.
           </h1>
           <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-navy-soft">
             Cuci komplit {rupiah(6000)} per kilo, selesai 2 hari. Lagi buru-buru? Ada kilat 4 jam.
@@ -166,7 +166,7 @@ const LandingPage = () => {
         <div className="container grid gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <h2 id="lokasi-title" className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Laundry terdekat di Rawa Buntu, Serpong
+              Lokasi outlet & antar-jemput
             </h2>
             <address className="mt-6 flex gap-3 text-lg not-italic leading-relaxed text-navy-soft">
               <PinIcon className="mt-1 h-5 w-5 shrink-0 text-brand-600" />
